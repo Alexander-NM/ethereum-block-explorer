@@ -1,7 +1,6 @@
-// import React from 'react'
+import { useParams } from "react-router"
 
 export default function Transactions() {
-  return (
-    <div>Transactions</div>
-  )
+    const { blockNumber } = useParams<{ blockNumber: string }>()
+    return <div>Transactions for Block: {blockNumber}</div>
 }

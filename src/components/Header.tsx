@@ -4,7 +4,7 @@ export default function Header() {
 
     return (
         <header>
-            <Link className="site-logo" to=".">
+            <Link className="site-logo" to="blocks">
                 #Ethereum Blocks
             </Link>
             <nav>
@@ -12,7 +12,7 @@ export default function Header() {
                     className={({ isActive }) =>
                         isActive ? "active-link" : ""
                     }
-                    to="."
+                    to="blocks"
                 >
                     Home
                 </NavLink>
@@ -20,7 +20,7 @@ export default function Header() {
                     className={({ isActive }) =>
                         isActive ? "active-link" : ""
                     }
-                    to="/account-balance"
+                    to="account-balance"
                 >
                     Account Balance
                 </NavLink>

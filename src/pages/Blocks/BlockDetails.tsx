@@ -1,7 +1,6 @@
-// import React from 'react'
+import { useParams } from "react-router"
 
 export default function BlockDetails() {
-  return (
-    <div>BlockDetails</div>
-  )
+    const { blockNumber } = useParams<{ blockNumber: string }>()
+    return <div>BlockDetails for Block: {blockNumber}</div>
 }

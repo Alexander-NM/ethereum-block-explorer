@@ -6,7 +6,7 @@ html,
 body {
     margin: 0;
     padding: 0;
-    background-color: #fff7ed;
+    background-color: #EEF2F3;
     font-family: "Inter", sans-serif;
     scrollbar-width: none;
 }
@@ -24,7 +24,7 @@ a {
 
 /*** Header ***/
 header {
-    height: 110px;
+    height: 80px;
     display: flex;
     align-items: center;
     padding-block: 10px;
@@ -42,7 +42,7 @@ header a {
     text-decoration: none;
     color: #4d4d4d;
     font-weight: 600;
-    padding: 5px 20px;
+    padding: 5px 25px;
 }
 
 header a:hover {
@@ -92,4 +92,59 @@ footer {
     background-color: #252525;
     color: #aaaaaa;
     margin-top: auto;
+}
+
+/*** Utilities ***/
+.active-link {
+    font-weight: bold;
+    color: #161616;
+    text-decoration: underline;
+}
+
+/*** Main ***/
+main {
+    flex: 1;
+    padding-inline: 25px;
+    align-items: center;
+}
+
+main > h2 {
+    margin-top: 0;
+}
+
+/*** Table ***/
+.ant-table-cell  a {
+    color: rgb(7, 132, 195);
+}
+
+.ant-table-cell  a:hover {
+    color: rgb(7, 67, 195);
+    text-decoration: underline;
+}
+
+.ant-table-thead > tr > th {
+    background-color: #C7E4DA !important;
+}
+
+.ant-table-tbody > tr > td {
+    background-color: #E2E9C9 !important;
+}
+
+.ant-table-cell .block-number {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/*** Input Number ***/
+.block-number-input {
+    margin-bottom: 20px;
+}
+
+.block-number-input .ant-input-number{
+    background-color: #EEF2F3;
+}
+
+.block-number-input .ant-input-number:hover{
+    border-color: #90c7b4;
 }
