@@ -23,6 +23,15 @@ export async function getLatestBlocks(numberOfBlocks = 10) {
     }
 }
 
+export async function getBlock(blockNumber: number) {
+    try {
+        const block = await alchemySDK.core.getBlock(blockNumber)
+        return block
+    } catch (error) {
+        console.error("Error fetching block:", error)
+    }
+}
+
 export async function getBlockTransactions(blockNumber: number) {
     try {
         const block = await alchemySDK.core.getBlockWithTransactions(blockNumber)

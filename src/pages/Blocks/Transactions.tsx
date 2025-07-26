@@ -15,9 +15,9 @@ export default function Transactions() {
 
             const txs = await getBlockTransactions(Number(blockNumber))
             if (!txs) return
-            console.log("Fetched transactions:", txs)
             setTransactions(
                 txs.map((tx) => ({
+                    key: tx.hash,
                     hash: tx.hash,
                     blockNumber: tx.blockNumber,
                     confirmations: tx.confirmations,
