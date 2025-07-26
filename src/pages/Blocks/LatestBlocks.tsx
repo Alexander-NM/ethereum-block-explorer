@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react"
-import type { Block } from "../types/app.types"
-import AntdTable from "../components/Table"
-import { getLatestBlocks } from "../utils/alchemy"
-import { Button, InputNumber, Space, type TableProps } from "antd"
-import { Link } from "react-router"
-import { IoCubeOutline } from "react-icons/io5"
+import type { Block } from "../../types/app.types"
+import { BlocksTable } from "../../components/UI/Tables/BlocksTable"
+import { getLatestBlocks } from "../../utils/alchemy"
+import { InputNumber, Space } from "antd"
 
 export default function LatestBlocks() {
     const [blocks, setBlocks] = useState<Block[]>([])
@@ -31,35 +29,6 @@ export default function LatestBlocks() {
         fetchBlocks()
     }, [numberOfBlocks])
 
-    function tableColumns(): TableProps<Block>["columns"] {
-        return [
-            {
-                title: "Block Number",
-                dataIndex: "number",
-                key: "number",
-                render: (text) => (
-                    <div className="block-number">
-                        <IoCubeOutline size={16} />
-                        <Link to={`block/${text}`}>{text}</Link>
-                    </div>
-                ),
-            },
-            {
-                title: "Timestamp",
-                dataIndex: "timestamp",
-                key: "timestamp",
-            },
-            {
-                title: "Transactions",
-                dataIndex: "txs",
-                key: "txs",
-                render: (text, { number }) => (
-                    <Link to={`block/${number}/txs`}>{text}</Link>
-                ),
-            },
-        ]
-    }
-
     return (
         <>
             <h2>Latest Ethereum Blocks</h2>
@@ -75,7 +44,7 @@ export default function LatestBlocks() {
             {blocks.length === 0 ? (
                 <p>Loading blocks...</p>
             ) : (
-                <AntdTable data={blocks} columns={tableColumns()} />
+                <BlocksTable data={blocks} />
             )}
         </>
     )
