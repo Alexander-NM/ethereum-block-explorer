@@ -1,4 +1,5 @@
-import type { BigNumber } from "alchemy-sdk"
+import type { BigNumber, TransactionReceipt } from "alchemy-sdk"
+import type { AccessList } from "@ethersproject/transactions"
 
 export interface Block {
     key: string
@@ -18,5 +19,10 @@ export interface Transaction {
 
 export interface BlockProperties {
     property: string
-    value: string | number | string[] | BigNumber | null 
+    value: string | number | string[] | BigNumber | null
+}
+export interface TransactionProperties {
+    property: string
+    value: string | number | BigNumber | ((confirmations?: number | undefined) => Promise<TransactionReceipt>) | AccessList | null
+    key: string
 }

@@ -41,6 +41,15 @@ export async function getBlockTransactions(blockNumber: number) {
     }
 }
 
+export async function getTransaction(txnHash: string) {
+    try {
+        const transaction = await alchemySDK.core.getTransaction(txnHash)
+        return transaction
+    } catch (error) {
+        console.error("Error fetching transaction:", error)
+    }
+}
+
 export function formatEther(weiValue: string): string {
     const ethValue = Number(Utils.formatEther(weiValue)).toFixed(8)
     return ethValue === "0.00000000" ? "0" : ethValue

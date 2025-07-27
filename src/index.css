@@ -178,6 +178,10 @@ main > h2 {
     gap: 8px;
 }
 
+.transaction-details-table {
+    margin-bottom: 30px;
+}
+
 /*** Input Number ***/
 .block-number-input {
     margin-bottom: 20px;

@@ -21,7 +21,7 @@ export const TransactionsTable: React.FC<{
                 key: "hash",
                 render: (text, record) => (
                     <Link
-                        to={`/blocks/block/${record.blockNumber}/txs/${text}`}
+                        to={`/blocks/block/${record.blockNumber}/txns/${text}`}
                     >
                         {text.slice(0, 13)}...
                     </Link>

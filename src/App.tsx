@@ -4,7 +4,7 @@ import LatestBlocks from "./pages/Blocks/LatestBlocks"
 import AccountBalance from "./pages/AccountInformation/AccountBalance"
 import BlockDetails from "./pages/Blocks/BlockDetails"
 import Transactions from "./pages/Blocks/Transactions"
-import TransactionDetail from "./pages/Blocks/TransactionDetail"
+import TransactionDetail from "./pages/Blocks/TransactionDetails"
 
 function App() {
     return (
@@ -21,7 +21,7 @@ function App() {
                         element={<Transactions />}
                     />
                     <Route
-                        path="blocks/block/:blockNumber/txs/:txHash"
+                        path="blocks/block/:blockNumber/txns/:txnHash"
                         element={<TransactionDetail />}
                     />
                     <Route

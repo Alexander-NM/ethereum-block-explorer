@@ -4,6 +4,8 @@ import { getBlock } from "../../utils/alchemy"
 import { BlocksDetailsTable } from "../../components/UI/Tables/BlockDetailsTable"
 import type { BlockProperties } from "../../types/app.types"
 import type { Block } from "alchemy-sdk"
+import { camelCaseToRegularText } from "../../utils/textUtils"
+import { hexToLocaleString } from "../../utils/numberUtils"
 
 type FormatedBlock = Omit<
     Partial<Block>,
@@ -30,14 +32,8 @@ export default function BlockDetails() {
             formattedBlock.timestamp = new Date(
                 block.timestamp * 1000
             ).toLocaleString()
-            formattedBlock.gasLimit = parseInt(
-                block.gasLimit._hex,
-                16
-            ).toLocaleString()
-            formattedBlock.gasUsed = parseInt(
-                block.gasUsed._hex,
-                16
-            ).toLocaleString()
+            formattedBlock.gasLimit = hexToLocaleString(block.gasLimit._hex)
+            formattedBlock.gasUsed = hexToLocaleString(block.gasUsed._hex)
             formattedBlock.transactions = block.transactions.length
             delete formattedBlock.nonce
             delete formattedBlock.difficulty
@@ -53,7 +49,6 @@ export default function BlockDetails() {
         }
         const fetchBlock = async () => {
             const block = await getBlock(Number(blockNumber))
-            console.log("Fetched block:", block)
             if (block) {
                 setBlockProperties(convertBlockToProperties(block))
             }
@@ -61,17 +56,6 @@ export default function BlockDetails() {
 
         fetchBlock()
     }, [blockNumber, setBlockProperties])
-
-    const camelCaseToRegularText = (camelCaseString: string) => {
-        // Add a space before each uppercase letter that is preceded by a lowercase letter
-        const withSpaces = camelCaseString.replace(/([a-z])([A-Z])/g, "$1 $2")
-
-        // Capitalize the first letter of the entire string
-        const capitalizedFirst =
-            withSpaces.charAt(0).toUpperCase() + withSpaces.slice(1)
-
-        return capitalizedFirst
-    }
 
     if (!blockProperties.length) {
         return <p>Loading block details...</p>
@@ -82,7 +66,10 @@ export default function BlockDetails() {
             {blockProperties.length === 0 ? (
                 <p>Loading block properties...</p>
             ) : (
-                <BlocksDetailsTable data={blockProperties} blockNumber={blockNumber} />
+                <BlocksDetailsTable
+                    data={blockProperties}
+                    blockNumber={blockNumber}
+                />
             )}
         </>
     )
