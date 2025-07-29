@@ -6,6 +6,7 @@ import BlockDetails from "./pages/Blocks/BlockDetails"
 import Transactions from "./pages/Blocks/Transactions"
 import TransactionDetail from "./pages/Blocks/TransactionDetails"
 import AccountLayout from "./pages/AccountInformation/AccountLayout"
+import NotFound from "./pages/NotFound"
 
 function App() {
     return (
@@ -29,6 +30,7 @@ function App() {
                         <Route path=":address" element={<AccountDetails />} />
                     </Route>
                 </Route>
+                <Route path="*" element={<NotFound />} />
             </Routes>
         </BrowserRouter>
     )

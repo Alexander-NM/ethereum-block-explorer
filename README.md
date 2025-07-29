@@ -12,12 +12,60 @@ A modern, responsive web application for exploring the Ethereum blockchain. Buil
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: React.js with modern ES6+ features
+- **Frontend**: React.js with modern ES6+ features, React Router
 - **UI Framework**: Ant Design for consistent, professional UI components
 - **Blockchain SDK**: Alchemy SDK v3.x for Ethereum data access
 - **Web3**: Ethereum blockchain integration with enhanced reliability
 - **Styling**: CSS3 with responsive design principles
 - **Build Tool**: Modern JavaScript bundling and optimization
+
+## ⚡ Vite Configuration
+
+This project leverages Vite for superior development experience and build performance:
+
+### Key Benefits
+- **Instant Server Start**: Cold start in under 100ms
+- **Lightning Fast HMR**: Updates reflect instantly during development
+- **Optimized Builds**: Tree-shaking and code splitting out of the box
+- **ES Modules**: Native ESM support for better performance
+- **Plugin Ecosystem**: Rich plugin ecosystem for extended functionality
+
+### Vite Features Used
+```javascript
+// vite.config.js configuration highlights
+- React Fast Refresh for instant component updates
+- Asset optimization and compression
+- Environment variable handling
+- Bundle analysis and optimization
+```
+
+### Build Performance
+- **Development**: ~100ms cold start, <10ms HMR updates
+- **Production**: Optimized bundles with tree-shaking and minification
+- **Assets**: Automatic optimization of images, fonts, and static files
+
+## 🧭 React Router Integration
+
+This application uses React Router v6 for client-side routing and navigation:
+
+### Key Routing Features
+- **Declarative Routing**: Clean URL structure for blockchain exploration
+- **Nested Routes**: Organized route hierarchy for different explorer sections
+- **Dynamic Parameters**: URL parameters for blocks, transactions, and addresses
+- **Browser History**: Full back/forward navigation support
+- **404 Handling**: Graceful error pages for invalid routes
+
+### Route Structure
+```javascript
+// Main application routes
+/blocks                                    // Homepage with latest blocks
+/blocks/block/:blockNumber                 // Individual block details
+/blocks/block/:blockNumber/txs             // Individual block transactions
+/blocks/block/:blockNumber/txns/:txnHash   // Transaction details page
+/account                                   // Layout page for account with search input
+/account/:address                          // Account balance and historical transactions
+/*                                         // 404 Not Found page
+```
 
 ## ⚡ Alchemy SDK Integration
 
@@ -59,7 +107,7 @@ const alchemy = new Alchemy(config);
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/ethereum-block-explorer.git
+   git clone https://github.com/Alexander-NM/ethereum-block-explorer.git
    cd ethereum-block-explorer
    ```
 
@@ -77,16 +125,8 @@ const alchemy = new Alchemy(config);
    Create a `.env` file in the root directory:
    ```env
    # Alchemy Configuration
-   REACT_APP_ALCHEMY_API_KEY=your_alchemy_api_key
-   REACT_APP_ALCHEMY_NETWORK=eth-mainnet
-   REACT_APP_ALCHEMY_WEBHOOK_URL=your_webhook_endpoint
+   VITE_ALCHEMY_API_KEY==your_alchemy_api_key
    
-   # Optional: Backup RPC endpoints
-   REACT_APP_FALLBACK_RPC_URL=your_backup_rpc_endpoint
-   
-   # Application Settings
-   REACT_APP_DEFAULT_NETWORK=mainnet
-   REACT_APP_ENABLE_NOTIFICATIONS=true
    ```
 
 5. **Start the development server**
@@ -104,258 +144,33 @@ const alchemy = new Alchemy(config);
 ### Block Explorer
 - Navigate to the homepage to view the latest blocks via Alchemy's enhanced block data
 - Click on any block to see detailed information including transaction count and gas usage
-- Real-time updates through Alchemy's WebSocket connections
-- Use the search bar to find specific blocks by number or hash
 
 ### Transaction Search
-- Enter a transaction hash to get comprehensive transaction details
-- View enhanced metadata including internal transactions (via Alchemy Trace API)
-- Gas optimization insights and transaction status updates
-- Explore related addresses and smart contracts
+- Navigate a transaction hash to get comprehensive transaction details
 
 ### Address Analysis
 - Search for any Ethereum address with Alchemy's enhanced address APIs
 - View complete transaction history with pagination
 - Real-time balance updates including ERC-20 tokens
-- NFT holdings and metadata display
-- Set up address activity notifications via Alchemy webhooks
 
-### NFT Explorer
-- Browse NFT collections with rich metadata
-- View ownership history and transfer data
-- Real-time price and rarity information
-- Integration with popular NFT marketplaces
-
-## 🔧 Alchemy SDK Configuration
-
-### Network Configuration
-```javascript
-// Available networks
-const networks = {
-  mainnet: Network.ETH_MAINNET,
-  goerli: Network.ETH_GOERLI,
-  sepolia: Network.ETH_SEPOLIA,
-  polygon: Network.MATIC_MAINNET,
-  arbitrum: Network.ARB_MAINNET
-};
-```
-
-### API Rate Limits
-- **Free Tier**: 300 requests/second
-- **Growth Tier**: 660 requests/second
-- **Scale Tier**: Custom limits available
-
-### Enhanced Features
-```javascript
-// Alchemy-specific enhancements
-const enhancedOptions = {
-  includeInternalTxs: true,    // Include internal transactions
-  includeTokenMetadata: true,   // Token metadata in transfers
-  includeGasUsed: true,        // Detailed gas analysis
-  includeTraces: true          // Transaction traces
-};
-```
-
-## 📁 Project Structure
-
-```
-ethereum-block-explorer/
-├── public/
-│   ├── index.html
-│   └── favicon.ico
-├── src/
-│   ├── components/
-│   │   ├── BlockExplorer/
-│   │   ├── TransactionView/
-│   │   ├── AddressInfo/
-│   │   ├── NFTExplorer/
-│   │   └── common/
-│   ├── hooks/
-│   │   ├── useAlchemy.js
-│   │   ├── useWebSocket.js
-│   │   └── useNotifications.js
-│   ├── services/
-│   │   ├── alchemyService.js
-│   │   ├── webhookService.js
-│   │   └── cacheService.js
-│   ├── utils/
-│   │   ├── alchemyConfig.js
-│   │   └── formatters.js
-│   ├── styles/
-│   ├── App.js
-│   └── index.js
-├── package.json
-└── README.md
-```
-
-## 🌐 API Integration
-
-### Primary APIs (Alchemy SDK)
-- **Core API**: Block, transaction, and address data
-- **Enhanced API**: Additional metadata and insights
-- **NFT API**: NFT metadata, ownership, and transfer data
-- **Notify API**: Real-time webhooks for address activity
-- **Transact API**: Gas estimation and transaction broadcasting
-
-### Backup APIs
-- **Etherscan API**: Fallback for additional data verification
-- **Gas Station API**: Alternative gas price information
-
-### Webhook Configuration
-```javascript
-// Alchemy Notify setup for real-time updates
-const webhookConfig = {
-  url: process.env.REACT_APP_ALCHEMY_WEBHOOK_URL,
-  addresses: ['0x...'], // Addresses to monitor
-  webhookType: 'ADDRESS_ACTIVITY'
-};
-```
-
-## 📊 Performance Optimizations
-
-### Alchemy SDK Optimizations
-- **Request Batching**: Multiple calls in single request
-- **Caching Strategy**: Local storage for frequently accessed data
-- **Connection Pooling**: Efficient WebSocket management
-- **Error Handling**: Automatic retries with exponential backoff
-
-### Code Examples
-```javascript
-// Batch requests for better performance
-const batchRequests = async (addresses) => {
-  const balancePromises = addresses.map(addr => 
-    alchemy.core.getBalance(addr)
-  );
-  return Promise.all(balancePromises);
-};
-
-// WebSocket for real-time updates
-alchemy.ws.on('block', (blockNumber) => {
-  console.log('New block:', blockNumber);
-  updateBlockData(blockNumber);
-});
-```
-
-## 🧪 Testing
-
-```bash
-# Run unit tests
-npm test
-
-# Run tests with Alchemy SDK mocks
-npm run test:alchemy
-
-# Run integration tests with testnet
-npm run test:integration
-
-# Test webhook functionality
-npm run test:webhooks
-```
-
-## 🚀 Deployment
-
-### Environment Variables for Production
-```env
-# Production Alchemy settings
-REACT_APP_ALCHEMY_API_KEY=prod_api_key
-REACT_APP_ALCHEMY_NETWORK=eth-mainnet
-REACT_APP_ALCHEMY_WEBHOOK_URL=https://yourapp.com/webhooks
-
-# Performance settings
-REACT_APP_CACHE_DURATION=300000
-REACT_APP_MAX_RETRY_ATTEMPTS=3
-REACT_APP_REQUEST_TIMEOUT=30000
-```
-
-### Alchemy Dashboard Configuration
-1. **Monitor API Usage**: Track requests and rate limits
-2. **Set Up Alerts**: Get notified of unusual activity
-3. **Configure Webhooks**: Set up real-time notifications
-4. **Analyze Performance**: Use Alchemy's analytics dashboard
-
-## 🔒 Security Best Practices
-
-### API Key Management
-- Never expose API keys in client-side code
-- Use environment variables for all sensitive data
-- Implement API key rotation policies
-- Monitor usage for unusual patterns
-
-### Rate Limiting
-```javascript
-// Implement client-side rate limiting
-const rateLimiter = {
-  requests: 0,
-  resetTime: Date.now() + 60000,
-  
-  canMakeRequest() {
-    if (Date.now() > this.resetTime) {
-      this.requests = 0;
-      this.resetTime = Date.now() + 60000;
-    }
-    return this.requests < 300; // Free tier limit
-  }
-};
-```
-
-## 📈 Monitoring and Analytics
-
-### Alchemy Dashboard Metrics
-- **Request Volume**: Track API usage patterns
-- **Response Times**: Monitor performance
-- **Error Rates**: Identify and resolve issues
-- **Webhook Delivery**: Monitor real-time notification reliability
-
-### Application Metrics
-- **User Engagement**: Track feature usage
-- **Performance**: Monitor load times and responsiveness
-- **Error Tracking**: Capture and resolve client-side errors
-
-## 🤝 Contributing
-
-1. **Fork the repository**
-2. **Set up Alchemy development account**
-3. **Create a feature branch**
-   ```bash
-   git checkout -b feature/alchemy-enhancement
-   ```
-4. **Test with Alchemy testnet**
-5. **Commit your changes**
-   ```bash
-   git commit -m 'Add Alchemy SDK enhancement'
-   ```
-6. **Push to the branch**
-   ```bash
-   git push origin feature/alchemy-enhancement
-   ```
-7. **Open a Pull Request**
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🔗 Links
 
-- **Live Demo**: [https://your-ethereum-explorer.netlify.app](https://your-ethereum-explorer.netlify.app)
 - **Alchemy Documentation**: [https://docs.alchemy.com/](https://docs.alchemy.com/)
 - **Alchemy SDK GitHub**: [https://github.com/alchemyplatform/alchemy-sdk-js](https://github.com/alchemyplatform/alchemy-sdk-js)
-- **Project Documentation**: [Project Wiki](https://github.com/yourusername/ethereum-block-explorer/wiki)
 
-## 📞 Support
-
-If you have any questions or run into issues:
-- Check [Alchemy Documentation](https://docs.alchemy.com/)
-- Open an issue on GitHub
-- Contact the development team
-- Join the [Alchemy Discord](https://discord.gg/alchemy)
 
 ## 🙏 Acknowledgments
 
+- **React Team** for creating the powerful and flexible React library that makes modern UI development a joy
+- **Vite Team** for revolutionizing the frontend build tool experience with lightning-fast HMR and optimized builds
+- **React Router Team** for providing seamless client-side routing and navigation capabilities
 - **Alchemy Team** for providing robust blockchain infrastructure and SDK
-- **Ethereum Foundation** for blockchain infrastructure
-- **Ant Design team** for excellent UI components
-- **Web3 community** for tools and libraries
-- **Contributors and beta testers**
+- **Ethereum Foundation** for blockchain infrastructure and the revolutionary Web3 ecosystem
+- **Ant Design Team** for excellent UI components and design system
+- **Evan You & Vue.js Team** for inspiring the Vite build tool that powers our development experience
+- **Web3 Community** for continuous innovation in blockchain tools and libraries
+- **Open Source Contributors** who make projects like this possible
 
 ---
 
