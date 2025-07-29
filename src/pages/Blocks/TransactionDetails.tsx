@@ -2,10 +2,10 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router"
 import type { TransactionProperties } from "../../types/app.types"
 import { formatEther, getTransaction } from "../../utils/alchemy"
-import { camelCaseToRegularText } from "../../utils/textUtils"
+import { camelCaseToRegularText } from "../../utils/utils"
 import type { TransactionResponse } from "alchemy-sdk"
 import { TransactionDetailsTable } from "../../components/UI/Tables/TransactionDetailsTable"
-import { hexToLocaleString } from "../../utils/numberUtils"
+import { hexToLocaleString } from "../../utils/utils"
 
 type FormattedTransaction = Omit<
     Partial<TransactionResponse>,

@@ -4,8 +4,8 @@ import { getBlock } from "../../utils/alchemy"
 import { BlocksDetailsTable } from "../../components/UI/Tables/BlockDetailsTable"
 import type { BlockProperties } from "../../types/app.types"
 import type { Block } from "alchemy-sdk"
-import { camelCaseToRegularText } from "../../utils/textUtils"
-import { hexToLocaleString } from "../../utils/numberUtils"
+import { camelCaseToRegularText } from "../../utils/utils"
+import { hexToLocaleString } from "../../utils/utils"
 
 type FormatedBlock = Omit<
     Partial<Block>,

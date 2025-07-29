@@ -20,9 +20,9 @@ export default function Header() {
                     className={({ isActive }) =>
                         isActive ? "active-link" : ""
                     }
-                    to="account-balance"
+                    to="account"
                 >
-                    Account Balance
+                    Account details
                 </NavLink>
             </nav>
         </header>

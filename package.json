@@ -10,7 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ant-design/web3": "^1.24.0",
     "alchemy-sdk": "^3.6.1",
+    "ant-design": "^1.0.0",
     "antd": "^5.26.6",
     "react": "^19.1.0",
     "react-copy-to-clipboard": "^5.1.0",

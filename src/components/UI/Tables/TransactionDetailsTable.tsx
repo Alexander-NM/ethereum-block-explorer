@@ -29,6 +29,13 @@ export const TransactionDetailsTable: React.FC<{
                             </Link>
                         )
                     }
+                    if (record.property === "From" || record.property === "To") {
+                        return (
+                            <Link to={`/account/${value}`} >
+                                {value}
+                            </Link>
+                        )
+                    }
                     return value
                 },
             },

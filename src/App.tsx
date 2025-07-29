@@ -1,10 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router"
 import Layout from "./components/MainLayout"
 import LatestBlocks from "./pages/Blocks/LatestBlocks"
-import AccountBalance from "./pages/AccountInformation/AccountBalance"
+import AccountDetails from "./pages/AccountInformation/AccountDetails"
 import BlockDetails from "./pages/Blocks/BlockDetails"
 import Transactions from "./pages/Blocks/Transactions"
 import TransactionDetail from "./pages/Blocks/TransactionDetails"
+import AccountLayout from "./pages/AccountInformation/AccountLayout"
 
 function App() {
     return (
@@ -24,10 +25,9 @@ function App() {
                         path="blocks/block/:blockNumber/txns/:txnHash"
                         element={<TransactionDetail />}
                     />
-                    <Route
-                        path="account-balance"
-                        element={<AccountBalance />}
-                    />
+                    <Route path="account" element={<AccountLayout />}>
+                        <Route path=":address" element={<AccountDetails />} />
+                    </Route>
                 </Route>
             </Routes>
         </BrowserRouter>

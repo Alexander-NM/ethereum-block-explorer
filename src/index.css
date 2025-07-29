@@ -6,7 +6,7 @@ html,
 body {
     margin: 0;
     padding: 0;
-    background-color: #EEF2F3;
+    background-color: #eef2f3;
     font-family: "Inter", sans-serif;
     scrollbar-width: none;
 }
@@ -108,7 +108,7 @@ footer {
 .forward-icon {
     color: rgb(135, 147, 159);
     font-size: large;
-}   
+}
 
 /*** Main ***/
 main {
@@ -122,21 +122,21 @@ main > h2 {
 }
 
 /*** Table ***/
-.ant-table-cell  a {
+.ant-table-cell a {
     color: rgb(7, 132, 195);
 }
 
-.ant-table-cell  a:hover {
+.ant-table-cell a:hover {
     color: rgb(7, 67, 195);
     text-decoration: underline;
 }
 
 .ant-table-thead > tr > th {
-    background-color: #C7E4DA !important;
+    background-color: #c7e4da !important;
 }
 
 .ant-table-tbody > tr > td {
-    background-color: #E2E9C9 !important;
+    background-color: #e2e9c9 !important;
 }
 
 .ant-table-cell .block-number {
@@ -146,30 +146,30 @@ main > h2 {
 }
 
 .tooltip-container {
-  position: relative;
-  display: flex;
+    position: relative;
+    display: flex;
     align-items: center;
     gap: 8px;
 }
 
 .tooltip-text {
-  visibility: hidden;
-  background-color: black;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 5px;
-  position: absolute;
-  z-index: 1;
-  bottom: 125%; 
-  left: -40%;
-  opacity: 0;
-  transition: opacity 0.3s;
+    visibility: hidden;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: -40%;
+    opacity: 0;
+    transition: opacity 0.3s;
 }
 
 .tooltip-container:hover .tooltip-text {
-  visibility: visible;
-  opacity: 1;
+    visibility: visible;
+    opacity: 1;
 }
 
 .address-container {
@@ -187,10 +187,41 @@ main > h2 {
     margin-bottom: 20px;
 }
 
-.block-number-input .ant-input-number{
-    background-color: #EEF2F3;
+.block-number-input .ant-input-number {
+    background-color: #eef2f3;
 }
 
-.block-number-input .ant-input-number:hover{
+.block-number-input .ant-input-number:hover {
     border-color: #90c7b4;
 }
+
+/*** Address details ***/
+.address {
+    font-size: 15px;
+    margin: 20px 0 10px;
+}
+
+.font-bold {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.crypto-price {
+    margin-block: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.balance {
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.search-address {
+    width: 450px;
+}
+

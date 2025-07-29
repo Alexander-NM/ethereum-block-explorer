@@ -35,7 +35,7 @@ export const TransactionsTable: React.FC<{
                 render: (text) => {
                     return (
                         <div className="address-container">
-                            <Link to={`/account-balance`}>
+                            <Link to={`/account/${text}`} >
                                 <div className="tooltip-container">
                                     <span className="shortened-text">{`${text.slice(
                                         0,
@@ -67,7 +67,7 @@ export const TransactionsTable: React.FC<{
                 render: (text) => (
                     <div className="address-container">
                         <IoArrowForwardCircle className="forward-icon" />
-                        <Link to={`/account-balance`}>
+                        <Link to={`/account/${text}`}>
                             <div className="tooltip-container">
                                 <span className="shortened-text">{`${text.slice(
                                     0,

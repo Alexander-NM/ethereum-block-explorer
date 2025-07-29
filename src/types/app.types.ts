@@ -17,6 +17,16 @@ export interface Transaction {
     value?: string,
 }
 
+export interface AccountTransactions {
+    asset: string | null,
+    blockNum: string,
+    from: string,
+    to: string | null,
+    category: string,
+    value: number | null
+}
+
+
 export interface BlockProperties {
     property: string
     value: string | number | string[] | BigNumber | null

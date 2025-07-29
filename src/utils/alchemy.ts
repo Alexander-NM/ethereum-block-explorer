@@ -1,4 +1,4 @@
-import { Alchemy, Network, Utils } from "alchemy-sdk"
+import { Alchemy, AssetTransfersCategory, Network, SortingOrder, Utils } from "alchemy-sdk"
 
 const ALCHEMY_API_KEY = import.meta.env.VITE_ALCHEMY_API_KEY
 const settings = {
@@ -50,9 +50,62 @@ export async function getTransaction(txnHash: string) {
     }
 }
 
-export function formatEther(weiValue: string): string {
-    const ethValue = Number(Utils.formatEther(weiValue)).toFixed(8)
-    return ethValue === "0.00000000" ? "0" : ethValue
+export function formatEther(value: string | number | bigint): string {
+    try {
+        // If it's already a hex string, use it directly
+        if (typeof value === 'string' && value.startsWith('0x')) {
+            return Utils.formatEther(value)
+        }
+
+        // If it's a number in scientific notation, convert to BigInt first
+        if (typeof value === 'string' && value.includes('e')) {
+            return Utils.formatEther(BigInt(parseFloat(value)).toString())
+        }
+
+        // For other cases, convert to string
+        return Utils.formatEther(value.toString())
+    } catch (error) {
+        console.error('Error formatting ether:', error, 'Value:', value)
+        return '0'
+    }
+
 }
+
+export async function getBalance(address: string) {
+    try {
+        const balance = await alchemySDK.core.getBalance(address)
+        return Utils.formatEther(balance)
+    } catch (error) {
+        console.error("Error fetching balance:", error)
+        return "0"
+    }
+}
+
+export async function getHistoricalTransfers(address: string, startBlock: string = "0x0", endBlock: string = "latest", order: SortingOrder = SortingOrder.DESCENDING) {
+
+    try {
+        if (!address) {
+            throw new Error("Address is required for fetching historical transfers")
+        }
+
+        // Fetch asset transfers for the given address
+        const transfers = await alchemySDK.core.getAssetTransfers({
+            fromBlock: startBlock,
+            toBlock: endBlock,
+            fromAddress: address,
+            excludeZeroValue: true,
+            category: [AssetTransfersCategory.ERC20, AssetTransfersCategory.ERC721],
+            maxCount: 250,
+            order: order,
+        })
+
+        return transfers.transfers
+    } catch (error) {
+        console.error("Error fetching historical transfers:", error)
+        return []
+    }
+}
+
+
 
 export default alchemySDK
